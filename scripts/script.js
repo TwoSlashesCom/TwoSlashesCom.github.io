@@ -59,3 +59,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const filterNav = document.getElementById('filter-nav');
+    let lastScrollTop = 0; 
+
+    const handleScroll = () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            filterNav.classList.add('hidden');
+        } else {
+            filterNav.classList.remove('hidden');
+        }
+
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('wheel', (e) => {
+        if (e.deltaY > 0) {
+            filterNav.classList.add('hidden');
+        } else {
+            filterNav.classList.remove('hidden');
+        }
+    });
+
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY; 
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        const touchEndY = e.touches[0].clientY;
+
+        if (touchEndY < touchStartY) {
+            filterNav.classList.add('hidden');
+        } else {
+            filterNav.classList.remove('hidden');
+        }
+
+        touchStartY = touchEndY; 
+    });
+});
