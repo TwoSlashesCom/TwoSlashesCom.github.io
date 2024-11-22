@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автомобили</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-page">
+
+        <div id="search-container" class="search-container">
+            <div class="search-form-container">
+                 <form id="search-form" class="search-form">
+                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
+                         <g fill="#2d7a2d" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                             <g transform="scale(8.53333,8.53333)">
+                                 <path d="M13,3c-5.511,0 -10,4.489 -10,10c0,5.511 4.489,10 10,10c2.39651,0 4.59738,-0.85101 6.32227,-2.26367l5.9707,5.9707c0.25082,0.26124 0.62327,0.36648 0.97371,0.27512c0.35044,-0.09136 0.62411,-0.36503 0.71547,-0.71547c0.09136,-0.35044 -0.01388,-0.72289 -0.27512,-0.97371l-5.9707,-5.9707c1.41266,-1.72488 2.26367,-3.92576 2.26367,-6.32227c0,-5.511 -4.489,-10 -10,-10zM13,5c4.43012,0 8,3.56988 8,8c0,4.43012 -3.56988,8 -8,8c-4.43012,0 -8,-3.56988 -8,-8c0,-4.43012 3.56988,-8 8,-8z"></path>
+                             </g>
+                         </g>
+                     </svg>
+                     <input type="text" id="search" placeholder="Найти объект" required>
+                     <button type="button" id="toggle-filters-btn" class="filter-btn">
+                         <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M7.76057 13.2843H1.19733" stroke="#26693D" stroke-width="0.909091" stroke-linecap="round" stroke-linejoin="round"/>
+                             <path d="M10.688 3.18788H17.2512" stroke="#26693D" stroke-width="0.909091" stroke-linecap="round" stroke-linejoin="round"/>
+                             <path fill-rule="evenodd" clip-rule="evenodd" d="M6.08987 3.13151C6.08987 1.78187 4.98762 0.6875 3.62826 0.6875C2.26891 0.6875 1.16666 1.78187 1.16666 3.13151C1.16666 4.48116 2.26891 5.57553 3.62826 5.57553C4.98762 5.57553 6.08987 4.48116 6.08987 3.13151Z" stroke="#26693D" stroke-width="0.909091" stroke-linecap="round" stroke-linejoin="round"/>
+                             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8333 13.2435C17.8333 11.8938 16.7319 10.7995 15.3726 10.7995C14.0123 10.7995 12.9101 11.8938 12.9101 13.2435C12.9101 14.5931 14.0123 15.6875 15.3726 15.6875C16.7319 15.6875 17.8333 14.5931 17.8333 13.2435Z" stroke="#26693D" stroke-width="0.909091" stroke-linecap="round" stroke-linejoin="round"/>
+                         </svg>
+                     </button>
+                 </form>
+            </div>
+            <div id="filters-container" class="filters-container hidden">
+ 
+                 <div class="filter">
+                     <label for="filter1">ID объявления:</label>
+                     <input id="id">
+                 </div>
+ 
+
+                 <div class="filter">
+                     <label for="filter2">Город:</label>
+                     <select id="city">
+                         <option value="1">Казань</option>
+                         <option value="2">Москва</option>
+                         <option value="3">Санкт-Петербург</option>
+                         <option value="4">Сочи</option>
+                     </select>
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter3">Тип машины:</label>
+                     <select id="car-type">
+                         <option value="1">Живая машина</option>
+                         <option value="2">Не живая машина</option>
+                         <option value="3">Автобус</option>
+                         <option value="4">Абобус</option>
+                         <option value="5">Буханка</option>
+                         <option value="6">Гробовозка</option>
+                         <option value="7">Гелик</option>
+                     </select>
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter4">Количество дверей:</label>
+                     <select id="door-count">
+                         <option value="1">Не выбрано</option>
+                         <option value="2">4 двери</option>
+                         <option value="3">30 дверей</option>
+                     </select>
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter5">Стоимость, руб:</label>
+                     <input id="cost">
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter6">Класс машины:</label>
+                     <select id="car-class">
+                         <option value="1">Не выбрано</option>
+                         <option value="2">Стандарт</option>
+                         <option value="3">Комфорт</option>
+                         <option value="4">Премиум</option>
+                         <option value="5">Бизнес класс</option>
+                     </select>
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter7">Объем двигателя:</label>
+                     <select id="engine-volume">
+                         <option value="1">Не выбрано</option>
+                         <option value="2">30-50</option>
+                         <option value="3">100-1400</option>
+                         <option value="4">1500-15000</option>
+                         <option value="5">220-800</option>
+                         <option value="6">Дизель</option>
+                     </select>
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter8">Передачи:</label>
+                     <input id="gear">
+                 </div>
+ 
+                 <div class="filter">
+                     <label for="filter9">Адрес машины:</label>
+                     <input id="car-adress">
+                 </div>
+ 
+                 <button type="submit" class="search-btn">Найти</button>
+             </div>
+        </div>
+
+        <div class="container" id="container">
+            <div id="filter-nav" class="filter-nav">
+                <h1>Автомобили</h1>
+                <div class="filter-nav-option">
+                    <a href="">Параметры</a>
+                    <a href="">Показать на карте</a>
+                </div>
+                <div class="filter-options">
+                    <div>
+                        <select>
+                            <option>Локация</option>
+                        </select>
+                        <select>
+                            <option>Тип объекта</option>
+                        </select>
+                    </div>
+                    <select>
+                        <option>Ценовой диапазон</option>
+                    </select>
+                    <button class="filter-nav-btn" type="submit">Показать варианты</button>
+                </div>
+            </div>
+    
+            <div class="item-list">
+    
+                <div class="card">
+                    <img src="https://www.figma.com/file/4GWHNmyLVZwZhqdKT8yRy6/image/34ea9ed8ea6c87008a36ec48a31bc1ff076d3d12">
+                    <p>Автомобиль для автомобилиста</p>
+                    <p>130 000 ₽ в месяц </p>
+                </div>
+    
+                <div class="card">
+                    <img src="https://www.figma.com/file/4GWHNmyLVZwZhqdKT8yRy6/image/3d3c82cbe90586d1f6069f725064d2505c693356">
+                    <p>Автомобиль для автомобилиста</p>
+                    <p>130 000 ₽ в месяц </p>
+                </div>
+    
+                <div class="card">
+                    <img src="https://www.figma.com/file/4GWHNmyLVZwZhqdKT8yRy6/image/3d3c82cbe90586d1f6069f725064d2505c693356">
+                    <p>Автомобиль для автомобилиста</p>
+                    <p>130 000 ₽ в месяц </p>
+                </div>
+    
+                <div class="card">
+                    <img src="https://www.figma.com/file/4GWHNmyLVZwZhqdKT8yRy6/image/3d3c82cbe90586d1f6069f725064d2505c693356">
+                    <p>Автомобиль для автомобилиста</p>
+                    <p>130 000 ₽ в месяц </p>
+                </div>
+            
+            </div>
+    
+    
+    
+            <div id="footer-block" class="footer-block">
+                <a href="mainpage.html">
+                    <div>
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect width="19" height="18" fill="url(#pattern0_1_275)"/>
+                            <defs>
+                            <pattern id="pattern0_1_275" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_1_275" transform="matrix(0.00471698 0 0 0.00497904 0 -0.000393082)"/>
+                            </pattern>
+                            <image id="image0_1_275" width="212" height="201" xlink:href="data:image/png;base64,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"/>
+                            </defs>
+                        </svg>
+                        <p>Главная</p>
+                    </div>
+                </a>
+            </div>
+    
+        </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/search.js"></script>
+
+
+</body>
+</html>
+  
