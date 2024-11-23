@@ -614,3 +614,95 @@ input:focus {
 .card p:last-child {
     font-weight: 700;
 }
+
+
+
+.custom-select {
+    position: relative;
+    font-size: 13px;
+    margin-bottom: 15px;
+    }
+  
+.custom-select select {
+    display: none; 
+
+}
+
+.custom-select label {
+    font-family: "PT Sans Caption", sans-serif;
+    font-size: 15px;
+    color: #070707; 
+    margin-top: 10px;
+}
+  
+.select-selected {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #E6E6E6;
+    border-radius: 30px;
+    height: 45px;
+    display: flex;
+    align-items: center;  
+    padding: 0px 16px;
+    margin-top: 10px;
+}
+  
+.select-selected:after {
+    border-radius: 24px 24px 0 0;
+
+    position: absolute;
+    content: "▼";
+    top: 45px;
+    right: 30px;
+    width: 0;
+    height: 0;
+}
+
+
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #000000 transparent;
+    content: "▲";
+  }
+
+  
+.select-items div, .select-selected {
+    color: #000000;
+    cursor: pointer;
+    user-select: none;
+    border-right: 2px solid #E6E6E6;
+    border-left: 2px solid #E6E6E6;
+}
+
+.select-items div{
+    padding: 8px 16px;
+}
+
+
+.select-items div:first-child{
+    border: 2px solid #E6E6E6;
+    border-bottom: none;
+    border-top: none;
+}
+
+.select-items div:last-child{
+    border-radius: 0 0 24px 24px;
+    border: 2px solid #E6E6E6;
+    border-top: none;
+}
+
+.select-items {
+    position: absolute;
+    background-color: white;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 0 0 24px 24px;
+}
+  
+.select-hide {
+  display: none;
+}
+  
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(255, 255, 255, 0.1);
+}
