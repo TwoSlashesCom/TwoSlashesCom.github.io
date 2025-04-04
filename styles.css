@@ -42,7 +42,8 @@ form input {
 	border-radius: 10px;
 	border: 1px solid gray;
 	padding-left: 10px;
-	width: 200px;
+	width: 60%;
+	box-sizing: border-box;
 }
 
 form button {
@@ -51,8 +52,9 @@ form button {
 	color: white;
 	background-color: rgb(47, 111, 250);
 	border: transparent;
-	width: 150px;
+	width: 30%;
 	cursor: pointer;
+	box-sizing: border-box;
 }
 
 .task-container {
