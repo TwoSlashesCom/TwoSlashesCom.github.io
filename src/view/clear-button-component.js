@@ -1,13 +1,13 @@
-export default class TaskComponent {
-	#task
+export default class ClearButtonComponent {
+	#onClick
 	#element = null
 
-	constructor(task) {
-		this.#task = task
+	constructor(onClick) {
+		this.#onClick = onClick
 	}
 
 	get template() {
-		return `<li class="task">${this.#task.title}</li>`
+		return `<button class="clear-button">✖ Очистить</button>`
 	}
 
 	getElement() {
@@ -15,6 +15,7 @@ export default class TaskComponent {
 			const wrapper = document.createElement('div')
 			wrapper.innerHTML = this.template
 			this.#element = wrapper.firstElementChild
+			this.#element.addEventListener('click', this.#onClick)
 		}
 		return this.#element
 	}

@@ -1,46 +1,26 @@
-import { render, RenderPosition } from './framework/render.js';
-import HeaderComponent from './view/header-component.js';
-import FormComponent from './view/form-component.js';
-import BoardComponent from './view/board-component.js';
-import ListComponent from './view/list-component.js';
-import TaskComponent from './view/task-component.js';
+import { render } from './framework/render.js'
+import HeaderComponent from './view/header-component.js'
+import BoardComponent from './view/board-component.js'
+import FormComponent from './view/form-component.js'
+import TasksBoardPresenter from './presenter/tasks-board-presenter.js'
+import TaskModel from './model/task-model.js'
 
-const body = document.querySelector('body');
+const headerContainer = document.querySelector('.header')
+const boardContainer = document.querySelector('.board')
 
-const header = new HeaderComponent();
-render(header, body, RenderPosition.AFTERBEGIN);
+const headerComponent = new HeaderComponent()
+render(headerComponent, headerContainer)
 
-const main = document.querySelector('main');
-const form = new FormComponent();
-render(form, main, RenderPosition.AFTERBEGIN);
+const formComponent = new FormComponent()
+render(formComponent, boardContainer)
 
-const board = new BoardComponent();
-render(board, main);
+const boardComponent = new BoardComponent()
+render(boardComponent, boardContainer)
 
-const boardContainer = board.getElement();
+const taskModel = new TaskModel()
+const boardPresenter = new TasksBoardPresenter({
+	boardContainer: boardComponent.element,
+	taskModel,
+})
 
-const lists = [
-  { title: 'Бэклог', className: 'backlog', tasks: ['Выучить JS', 'Выучить React', 'Сделать домашку'] },
-  { title: 'В процессе', className: 'in-process', tasks: ['Выпить смузи', 'Выпить воды'] },
-  { title: 'Готово', className: 'done', tasks: ['Позвонить маме', 'Погладить кота'] },
-  { title: 'Корзина', className: 'bucket', tasks: ['Выучить JS', 'Выучить React', 'Сделать домашку'] }
-];
-
-lists.forEach(({ title, className, tasks }) => {
-  const list = new ListComponent(title, className);
-  render(list, boardContainer);
-
-  const ul = list.getElement().querySelector('ul');
-
-  tasks.forEach((task) => {
-    const taskComponent = new TaskComponent(task);
-    render(taskComponent, ul);
-  });
-
-  if (className === 'bucket') {
-    const button = document.createElement('button');
-    button.textContent = '✖ Очистить';
-    button.classList.add('clear-bucket');
-    ul.appendChild(button);
-  }
-});
+boardPresenter.init()

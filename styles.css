@@ -18,7 +18,7 @@ header h1 {
 	margin-left: 70px;
 }
 
-main {
+.board {
 	display: flex;
 	flex-direction: column;
 }
@@ -102,7 +102,7 @@ section ul li {
 	border-left: 7px solid rgb(215, 215, 215);
 }
 
-section ul button {
+.clear-button {
 	align-items: center;
 	justify-content: center;
 	display: flex;

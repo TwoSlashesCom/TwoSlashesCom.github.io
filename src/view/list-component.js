@@ -4,7 +4,7 @@ function createListTemplate(title, className) {
 	return `
     <section class="${className}">
       <h5>${title}</h5>
-      <ul></ul>
+	<ul class="task-list"></ul>
     </section>
   `
 }
