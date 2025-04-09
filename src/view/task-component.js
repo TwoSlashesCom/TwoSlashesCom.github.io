@@ -1,21 +1,14 @@
-export default class TaskComponent {
+import { AbstractComponent } from '../framework/abstract-component.js'
+
+export default class TaskComponent extends AbstractComponent {
 	#task
-	#element = null
 
 	constructor(task) {
+		super()
 		this.#task = task
 	}
 
 	get template() {
 		return `<li class="task">${this.#task.title}</li>`
-	}
-
-	getElement() {
-		if (!this.#element) {
-			const wrapper = document.createElement('div')
-			wrapper.innerHTML = this.template
-			this.#element = wrapper.firstElementChild
-		}
-		return this.#element
 	}
 }

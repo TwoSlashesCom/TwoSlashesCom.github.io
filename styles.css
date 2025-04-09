@@ -144,3 +144,15 @@ section ul li {
 .bucket ul li {
 	border-left: 7px solid rgb(251, 161, 161);
 }
+
+.task-empty {
+	height: 60px;
+	margin: 10px 0;
+	background-color: transparent;
+	border: 2px dashed #ccc;
+	border-radius: 10px;
+	text-align: center;
+	line-height: 60px;
+	color: #999;
+	padding: 0 10px;
+}

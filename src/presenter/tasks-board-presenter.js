@@ -1,64 +1,101 @@
 import TaskComponent from '../view/task-component.js'
 import ListComponent from '../view/list-component.js'
 import ClearButtonComponent from '../view/clear-button-component.js'
+import EmptyComponent from '../view/empty-component.js'
 import { TaskStatusMap } from '../const.js'
 import { render } from '../framework/render.js'
 
-export default class TasksBoardPresenter {
-	constructor({ boardContainer, taskModel }) {
-		this.boardContainer = boardContainer
-		this.taskModel = taskModel
-	}
+const statusClassMap = {
+	todo: 'backlog',
+	'in-progress': 'in-process',
+	done: 'done',
+	removed: 'bucket',
+}
 
-	#clearBoard() {
-		this.boardContainer.innerHTML = ''
+export default class TasksBoardPresenter {
+	#boardContainer
+	#taskModel
+
+	constructor({ boardContainer, taskModel }) {
+		this.#boardContainer = boardContainer
+		this.#taskModel = taskModel
 	}
 
 	init() {
 		this.#clearBoard()
+		this.#renderBoard()
+	}
 
-		const tasks = this.taskModel.getTasks()
+	#clearBoard() {
+		this.#boardContainer.innerHTML = ''
+	}
 
-		const statuses = ['todo', 'in-progress', 'done', 'removed']
+	#renderBoard() {
+		const statuses = Object.keys(TaskStatusMap).filter(
+			status => status !== 'removed'
+		)
+		statuses.forEach(status => this.#renderTasksList(status))
+		this.#renderBucket()
+	}
 
-		const groupedTasks = Object.fromEntries(
-			statuses.map(status => [status, []])
+	#renderTasksList(status) {
+		const title = TaskStatusMap[status]
+		const className = statusClassMap[status]
+
+		const listComponent = new ListComponent(title, className)
+		render(listComponent, this.#boardContainer)
+
+		const listElement = listComponent.element.querySelector('.task-list')
+		const tasksForStatus = this.#taskModel.tasks.filter(
+			task => task.status === status
 		)
 
-		tasks.forEach(task => {
-			if (groupedTasks[task.status]) {
-				groupedTasks[task.status].push(task)
-			}
-		})
-
-		const statusClassMap = {
-			todo: 'backlog',
-			'in-progress': 'in-process',
-			done: 'done',
-			removed: 'bucket',
+		if (tasksForStatus.length === 0) {
+			this.#renderEmptyComponent(listComponent)
+			return
 		}
 
-		statuses.forEach(status => {
-			const title = TaskStatusMap[status]
-			const className = statusClassMap[status]
-
-			const listComponent = new ListComponent(title, className)
-			render(listComponent, this.boardContainer)
-
-			const listElement = listComponent.getElement().querySelector('.task-list')
-
-			groupedTasks[status].forEach(task => {
-				const taskComponent = new TaskComponent(task)
-				render(taskComponent, listElement)
-			})
-
-			if (status === 'removed' && groupedTasks[status].length > 0) {
-				const clearButton = new ClearButtonComponent(() => {
-					this.taskModel.clearRemoved()
-					this.init()
-				})
-				render(clearButton, listComponent.getElement())
-			}
+		tasksForStatus.forEach(task => {
+			this.#renderTask(task, listElement)
 		})
+	}
+
+	#renderBucket() {
+		const status = 'removed'
+		const title = TaskStatusMap[status]
+		const className = statusClassMap[status]
+
+		const listComponent = new ListComponent(title, className)
+		render(listComponent, this.#boardContainer)
+
+		const listElement = listComponent.element.querySelector('.task-list')
+		const tasksForStatus = this.#taskModel.tasks.filter(
+			task => task.status === status
+		)
+
+		if (tasksForStatus.length === 0) {
+			this.#renderEmptyComponent(listComponent)
+			return
+		}
+
+		tasksForStatus.forEach(task => {
+			this.#renderTask(task, listElement)
+		})
+
+		const clearButton = new ClearButtonComponent(() => {
+			this.#taskModel.clearRemoved()
+			this.init()
+		})
+		render(clearButton, listComponent.element)
+	}
+
+	#renderTask(task, container) {
+		const taskComponent = new TaskComponent(task)
+		render(taskComponent, container)
+	}
+
+	#renderEmptyComponent(listComponent) {
+		const emptyComponent = new EmptyComponent()
+		render(emptyComponent, listComponent.element)
 	}
 }

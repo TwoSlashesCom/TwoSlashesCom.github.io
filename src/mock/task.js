@@ -2,17 +2,17 @@ export const boardTasks = [
 	{
 		id: '1',
 		title: 'Выучить JS',
-		status: 'todo',
+		status: 'done',
 	},
 	{
 		id: '2',
 		title: 'Выучить React',
-		status: 'todo',
+		status: 'done',
 	},
 	{
 		id: '3',
 		title: 'Сделать домашку',
-		status: 'todo',
+		status: 'done',
 	},
 
 	{

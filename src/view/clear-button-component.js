@@ -1,22 +1,20 @@
-export default class ClearButtonComponent {
+import { AbstractComponent } from '../framework/abstract-component.js'
+
+export default class ClearButtonComponent extends AbstractComponent {
 	#onClick
-	#element = null
 
 	constructor(onClick) {
+		super()
 		this.#onClick = onClick
 	}
 
 	get template() {
-		return `<button class="clear-button">✖ Очистить</button>`
+		return `<button class="clear-button">Очистить корзину</button>`
 	}
 
-	getElement() {
-		if (!this.#element) {
-			const wrapper = document.createElement('div')
-			wrapper.innerHTML = this.template
-			this.#element = wrapper.firstElementChild
-			this.#element.addEventListener('click', this.#onClick)
-		}
-		return this.#element
+	get element() {
+		const element = super.element
+		element.addEventListener('click', this.#onClick)
+		return element
 	}
 }
