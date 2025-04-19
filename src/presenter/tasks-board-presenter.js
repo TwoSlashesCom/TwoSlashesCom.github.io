@@ -60,7 +60,6 @@ export default class TasksBoardPresenter {
 			this.#renderTask(task, listElement)
 		})
 
-		// ✅ Специально для корзины — добавляем кнопку очистки
 		if (status === 'removed') {
 			const bucketButton = new ClearButtonComponent(() => {
 				this.#taskModel.clearRemoved()
